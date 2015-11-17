@@ -23,7 +23,7 @@
 }
 
 // Properties
-@property (nonatomic, strong) UIImage *underlyingImage;
+// @property (nonatomic, strong) UIImage *underlyingImage; // Comment out by yusuga
 
 // Methods
 - (void)imageLoadingComplete;
@@ -37,6 +37,9 @@
 @synthesize underlyingImage = _underlyingImage, 
 photoURL = _photoURL,
 caption = _caption;
+
+@synthesize photoPath = _photoPath; // Added by yusuga
+@synthesize loadingInProgress = _loadingInProgress; // Added by yusuga
 
 #pragma mark Class Methods
 
