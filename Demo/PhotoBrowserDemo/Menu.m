@@ -215,7 +215,10 @@
         }
         else if(indexPath.row == 1 || indexPath.row == 2) // Photos from Flickr or Flickr - Custom
         {
-            NSArray *photosWithURL = [IDMPhoto photosWithURLs:[NSArray arrayWithObjects:[NSURL URLWithString:@"http://farm4.static.flickr.com/3567/3523321514_371d9ac42f_b.jpg"], @"http://farm4.static.flickr.com/3629/3339128908_7aecabc34b_b.jpg", [NSURL URLWithString:@"http://farm4.static.flickr.com/3364/3338617424_7ff836d55f_b.jpg"], @"http://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b_b.jpg", nil]];
+            NSArray *photosWithURL = [IDMPhoto photosWithURLs:@[[NSURL URLWithString:@"https://farm4.static.flickr.com/3567/3523321514_371d9ac42f_b.jpg"],
+                                                                @"https://farm4.static.flickr.com/3629/3339128908_7aecabc34b_b.jpg",
+                                                                [NSURL URLWithString:@"https://farm4.static.flickr.com/3364/3338617424_7ff836d55f_b.jpg"],
+                                                                @"https://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b_b.jpg"]];
             
             photos = [NSMutableArray arrayWithArray:photosWithURL];
         }
