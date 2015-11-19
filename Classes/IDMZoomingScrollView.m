@@ -165,6 +165,9 @@
     
 	// Sizes
     CGSize boundsSize = self.bounds.size;
+    CGFloat padding = 1./[UIScreen mainScreen].scale;
+    boundsSize.width -= padding;
+    boundsSize.height -= padding;
     CGSize imageSize = _photoImageView.frame.size;
     
     // Calculate Min
