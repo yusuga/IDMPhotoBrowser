@@ -141,6 +141,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 @synthesize trackTintColor = _trackTintColor, progressTintColor = _progressTintColor;
 @synthesize delegate = _delegate;
 
+@synthesize photos = _photos; // Added by yusuga
+//@synthesize currentPageIndex = _currentPageIndex; // Added by yusuga
+
 #pragma mark - NSObject
 
 - (id)init {
@@ -670,7 +673,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     _statusBarOriginallyHidden = [UIApplication sharedApplication].statusBarHidden;
     
     // Update UI
-	[self hideControlsAfterDelay];
+    if (self.hideInitialControls) {
+        [self setControlsHidden:YES animated:NO permanent:YES];
+    } else {
+        [self hideControlsAfterDelay];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

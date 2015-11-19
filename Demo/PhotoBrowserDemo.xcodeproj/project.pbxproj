@@ -24,9 +24,6 @@
 		4C6F97DA14AF760500F8389A /* photo4m.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F97D214AF760500F8389A /* photo4m.jpg */; };
 		727988B1187B3B5400966C66 /* IDMPBLocalizations.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 727988B0187B3B5400966C66 /* IDMPBLocalizations.bundle */; };
 		727988B7187B3CF100966C66 /* IDMPhotoBrowser.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 727988B6187B3CF100966C66 /* IDMPhotoBrowser.podspec */; };
-		B86BE0AB1BFB2E3B009D0B2B /* IDMPhoto+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = B86BE0A81BFB2E3B009D0B2B /* IDMPhoto+Private.m */; };
-		B86BE0AC1BFB2E3B009D0B2B /* TWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = B86BE0AA1BFB2E3B009D0B2B /* TWPhoto.m */; };
-		B86BE0B21BFB3CBB009D0B2B /* TWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = B86BE0B11BFB3CBB009D0B2B /* TWPhotoBrowser.m */; };
 		BDDE863029564DCEAF3437FF /* libPods-PhotoBrowserDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F398EC6BD549F7A2FDC451 /* libPods-PhotoBrowserDemo.a */; };
 		D114BB411A32269C00E677FE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D114BB401A32269C00E677FE /* Launch Screen.xib */; };
 		D1574968178DB94900B0211A /* IDMCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D157494F178DB94900B0211A /* IDMCaptionView.m */; };
@@ -84,12 +81,6 @@
 		727988B6187B3CF100966C66 /* IDMPhotoBrowser.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = IDMPhotoBrowser.podspec; path = ../../IDMPhotoBrowser.podspec; sourceTree = "<group>"; };
 		927DCB0B321DDC6CFC895FF5 /* Pods-PhotoBrowserDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowserDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A539B17F628FB7F9581056C4 /* Pods-PhotoBrowserDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowserDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo.release.xcconfig"; sourceTree = "<group>"; };
-		B86BE0A71BFB2E3B009D0B2B /* IDMPhoto+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDMPhoto+Private.h"; sourceTree = "<group>"; };
-		B86BE0A81BFB2E3B009D0B2B /* IDMPhoto+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDMPhoto+Private.m"; sourceTree = "<group>"; };
-		B86BE0A91BFB2E3B009D0B2B /* TWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPhoto.h; sourceTree = "<group>"; };
-		B86BE0AA1BFB2E3B009D0B2B /* TWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhoto.m; sourceTree = "<group>"; };
-		B86BE0B01BFB3CBB009D0B2B /* TWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPhotoBrowser.h; sourceTree = "<group>"; };
-		B86BE0B11BFB3CBB009D0B2B /* TWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhotoBrowser.m; sourceTree = "<group>"; };
 		D11464B61802FFC4005B7BC3 /* IDMPBConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDMPBConstants.h; sourceTree = "<group>"; };
 		D114BB401A32269C00E677FE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		D157494E178DB94900B0211A /* IDMCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDMCaptionView.h; sourceTree = "<group>"; };
@@ -155,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				D1574931178DB94900B0211A /* Classes */,
-				B86BE0A51BFB2E3B009D0B2B /* TWPhotoBrowser */,
 				4C6F979714AF734900F8389A /* PhotoBrowserDemo */,
 				4C6F97CA14AF75D300F8389A /* Photos */,
 				4C6F979814AF734900F8389A /* Supporting Files */,
@@ -241,28 +231,6 @@
 				A539B17F628FB7F9581056C4 /* Pods-PhotoBrowserDemo.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		B86BE0A51BFB2E3B009D0B2B /* TWPhotoBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				B86BE0B01BFB3CBB009D0B2B /* TWPhotoBrowser.h */,
-				B86BE0B11BFB3CBB009D0B2B /* TWPhotoBrowser.m */,
-				B86BE0A61BFB2E3B009D0B2B /* Model */,
-			);
-			name = TWPhotoBrowser;
-			path = ../Classes/TWPhotoBrowser;
-			sourceTree = "<group>";
-		};
-		B86BE0A61BFB2E3B009D0B2B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B86BE0A71BFB2E3B009D0B2B /* IDMPhoto+Private.h */,
-				B86BE0A81BFB2E3B009D0B2B /* IDMPhoto+Private.m */,
-				B86BE0A91BFB2E3B009D0B2B /* TWPhoto.h */,
-				B86BE0AA1BFB2E3B009D0B2B /* TWPhoto.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		D150527116F7B044002BBD4F /* AppDelegate */ = {
@@ -462,10 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86BE0B21BFB3CBB009D0B2B /* TWPhotoBrowser.m in Sources */,
 				4C6F979E14AF734900F8389A /* main.m in Sources */,
-				B86BE0AC1BFB2E3B009D0B2B /* TWPhoto.m in Sources */,
-				B86BE0AB1BFB2E3B009D0B2B /* IDMPhoto+Private.m in Sources */,
 				4C6F97A214AF734900F8389A /* AppDelegate.m in Sources */,
 				4C6F97B314AF737E00F8389A /* Menu.m in Sources */,
 				D1574968178DB94900B0211A /* IDMCaptionView.m in Sources */,

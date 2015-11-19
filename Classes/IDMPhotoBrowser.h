@@ -80,4 +80,8 @@
 // Get IDMPhoto at index
 - (id<IDMPhoto>)photoAtIndex:(NSUInteger)index;
 
+@property (nonatomic) BOOL hideInitialControls;
+@property (nonatomic, readonly) NSMutableArray *photos; // Added by yusuga
+//@property (nonatomic, readonly) NSUInteger currentPageIndex; // Added by yusuga
+
 @end
