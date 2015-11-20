@@ -141,8 +141,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 @synthesize trackTintColor = _trackTintColor, progressTintColor = _progressTintColor;
 @synthesize delegate = _delegate;
 
-@synthesize photos = _photos; // Added by yusuga
-@synthesize currentPageIndex = _currentPageIndex; // Added by yusuga
+#pragma mark Added by yusuga
+@synthesize photos = _photos;
+@synthesize currentPageIndex = _currentPageIndex;
+@synthesize doneButton = _doneButton;
 
 #pragma mark - NSObject
 

@@ -80,8 +80,10 @@
 // Get IDMPhoto at index
 - (id<IDMPhoto>)photoAtIndex:(NSUInteger)index;
 
-@property (nonatomic, readonly) NSMutableArray *photos; // Added by yusuga
-@property (nonatomic, readonly) NSUInteger currentPageIndex; // Added by yusuga
+#pragma mark Added by yusuga
+@property (nonatomic, readonly) NSMutableArray *photos;
+@property (nonatomic, readonly) NSUInteger currentPageIndex;
+@property (nonatomic, readonly) UIButton *doneButton;
 @property (nonatomic) BOOL hideControlsFirst;
 @property (nonatomic) BOOL disableHideControlsWhenDraggingBegins;
 @property (nonatomic) BOOL disableAutoHideControls;
