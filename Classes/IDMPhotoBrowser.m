@@ -703,10 +703,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 }
 
 - (BOOL)prefersStatusBarHidden {
-    if(_forceHideStatusBar) {
-        return YES;
-    }
-    
     if(_isdraggingPhoto) {
         if(_statusBarOriginallyHidden) {
             return YES;
@@ -716,6 +712,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         }
     }
     else {
+        if(_forceHideStatusBar && !_doneButton.highlighted) {
+            return YES;
+        }
         return [self areControlsHidden];
     }
 }
@@ -1245,6 +1244,8 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 #pragma mark - Buttons
 
 - (void)doneButtonPressed:(id)sender {
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     if (_senderViewForAnimation && _currentPageIndex == _initalPageIndex) {
         IDMZoomingScrollView *scrollView = [self pageDisplayedAtIndex:_currentPageIndex];
         [self performCloseAnimationWithScrollView:scrollView];
