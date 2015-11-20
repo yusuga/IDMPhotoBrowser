@@ -27,6 +27,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 	
     // Gesture
     UIPanGestureRecognizer *_panGesture;
+    UILongPressGestureRecognizer *_longPressGestureRecognizer;
     
 	// Paging
     NSMutableSet *_visiblePages, *_recycledPages;
@@ -360,6 +361,13 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     }
 }
 
+#pragma mark - Long Gesture
+
+- (void)longGestureRecognized:(UILongPressGestureRecognizer *)sender
+{
+    [self actionButtonPressed:sender.view];
+}
+
 #pragma mark - Animation
 
 - (UIImage*)rotateImageToCurrentOrientation:(UIImage*)image
@@ -657,6 +665,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
     [_panGesture setMinimumNumberOfTouches:1];
     [_panGesture setMaximumNumberOfTouches:1];
+    
+    _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+    if (self.enableLongPressGesture) {
+        [_pagingScrollView addGestureRecognizer:_longPressGestureRecognizer];
+    }
     
     // Update
     //[self reloadData];
@@ -1308,7 +1321,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
             self.actionsSheet.cancelButtonIndex = [self.actionsSheet addButtonWithTitle:IDMPhotoBrowserLocalizedStrings(@"Cancel")];
             self.actionsSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
             
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && [sender isKindOfClass:[UIBarButtonItem class]]) {
                 [_actionsSheet showFromBarButtonItem:sender animated:YES];
             } else {
                 [_actionsSheet showInView:self.view];
