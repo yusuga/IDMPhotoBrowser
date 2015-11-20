@@ -1063,7 +1063,13 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 - (CGSize)contentSizeForPagingScrollView {
     // We have to use the paging scroll view's bounds to calculate the contentSize, for the same reason outlined above.
     CGRect bounds = _pagingScrollView.bounds;
-    return CGSizeMake(bounds.size.width * [self numberOfPhotos], bounds.size.height);
+    
+    NSUInteger numberOfPhotos = [self numberOfPhotos];
+    if (numberOfPhotos == 1) {
+        return CGSizeMake(bounds.size.width + 1./[UIScreen mainScreen].scale, bounds.size.height);
+    } else {
+        return CGSizeMake(bounds.size.width * [self numberOfPhotos], bounds.size.height);
+    }
 }
 
 - (CGPoint)contentOffsetForPageAtIndex:(NSUInteger)index {
