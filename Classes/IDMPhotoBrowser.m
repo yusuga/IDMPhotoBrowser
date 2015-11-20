@@ -741,6 +741,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 #pragma mark - Layout
 
 - (void)viewWillLayoutSubviews {
+    if (_pagingScrollView.dragging || _pagingScrollView.tracking) {
+        return;
+    }
+    
 	// Flag
 	_performingLayout = YES;
     
