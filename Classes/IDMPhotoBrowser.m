@@ -142,7 +142,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 @synthesize delegate = _delegate;
 
 @synthesize photos = _photos; // Added by yusuga
-//@synthesize currentPageIndex = _currentPageIndex; // Added by yusuga
+@synthesize currentPageIndex = _currentPageIndex; // Added by yusuga
 
 #pragma mark - NSObject
 
@@ -582,6 +582,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     _toolbar.backgroundColor = [UIColor clearColor];
     _toolbar.clipsToBounds = YES;
     _toolbar.translucent = YES;
+    _toolbar.alpha = self.hideControlsFirst ? 0. : 1.;
     [_toolbar setBackgroundImage:[UIImage new]
               forToolbarPosition:UIToolbarPositionAny
                       barMetrics:UIBarMetricsDefault];
@@ -589,7 +590,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     // Close Button
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneButton setFrame:[self frameForDoneButtonAtOrientation:currentOrientation]];
-    [_doneButton setAlpha:1.0f];
+    [_doneButton setAlpha:self.hideControlsFirst ? 0. : 1.];
     [_doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     if(!_doneButtonImage) {
@@ -673,11 +674,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     _statusBarOriginallyHidden = [UIApplication sharedApplication].statusBarHidden;
     
     // Update UI
-    if (self.hideInitialControls) {
-        [self setControlsHidden:YES animated:NO permanent:YES];
-    } else {
-        [self hideControlsAfterDelay];
-    }
+    [self hideControlsAfterDelay];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -1130,8 +1127,10 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-	// Hide controls when dragging begins
-	[self setControlsHidden:YES animated:YES permanent:NO];
+    if (!self.disableHideControlsWhenDraggingBegins) {
+        // Hide controls when dragging begins
+        [self setControlsHidden:YES animated:YES permanent:NO];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -1216,6 +1215,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 // Enable/disable control visiblity timer
 - (void)hideControlsAfterDelay {
+    if (self.disableAutoHideControls) return;
 	// return;
     
     if (![self areControlsHidden]) {

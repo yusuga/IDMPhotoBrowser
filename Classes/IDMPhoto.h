@@ -38,9 +38,5 @@ typedef void (^IDMProgressUpdateBlock)(CGFloat progress);
 - (id)initWithFilePath:(NSString *)path;
 - (id)initWithURL:(NSURL *)url;
 
-@property (nonatomic) NSString *photoPath; // Added by yusuga
-@property (nonatomic) BOOL loadingInProgress; // Added by yusuga
-@property (nonatomic, strong) UIImage *underlyingImage; // Added by yusuga
-
 @end
 
