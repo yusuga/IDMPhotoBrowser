@@ -23,6 +23,10 @@
 @property (nonatomic, weak) IDMPhotoBrowser *photoBrowser;
 - (void)handleSingleTap:(CGPoint)touchPoint;
 - (void)handleDoubleTap:(CGPoint)touchPoint;
+
+/* Added by yusuga */
+@property (nonatomic) UIButton *playButton;
+@property (nonatomic) BOOL isVideoViewShown;
 @end
 
 @implementation IDMZoomingScrollView
@@ -91,6 +95,14 @@
     self.photo = nil;
     [_captionView removeFromSuperview];
     self.captionView = nil;
+    
+    self.isVideoViewShown = NO;
+    [self.playButton removeFromSuperview];
+    self.playButton = nil;
+    
+    if ([self.photoBrowser.delegate respondsToSelector:@selector(photoBrowserPrepareForReuseZommingScrollView:)]) {
+        [self.photoBrowser.delegate photoBrowserPrepareForReuseZommingScrollView:self];
+    }
 }
 
 #pragma mark - Image
@@ -193,9 +205,13 @@
 		}
 	}
     
-	// Set
-	self.maximumZoomScale = maxScale;
-	self.minimumZoomScale = minScale;
+    if ([self.photo videoURL]) {
+        maxScale = minScale; // Disable zoom
+    }
+    
+    // Set
+    self.maximumZoomScale = maxScale;
+    self.minimumZoomScale = minScale;
 	self.zoomScale = minScale;
     
 	// Reset position
@@ -233,6 +249,19 @@
 	// Center
 	if (!CGRectEqualToRect(_photoImageView.frame, frameToCenter))
 		_photoImageView.frame = frameToCenter;
+    
+    if ([self.photo videoURL] && !self.isVideoViewShown) {
+        if ([self.photoBrowser.photos count] == 1) {
+            [self playVideo];
+        } else {
+            if (!self.playButton && [self.photoBrowser.delegate respondsToSelector:@selector(photoBrowserPlayVideoButton)]) {
+                self.playButton = [self.photoBrowser.delegate photoBrowserPlayVideoButton];
+                [self.playButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+                [self addSubview:self.playButton];
+            }
+            self.playButton.center = CGPointMake(self.bounds.size.width/2., self.bounds.size.height/2.);
+        }
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -300,6 +329,16 @@
 }
 - (void)view:(UIView *)view doubleTapDetected:(UITouch *)touch {
     [self handleDoubleTap:[touch locationInView:view]];
+}
+
+#pragma mark - Button
+
+- (void)playVideo
+{
+    if ([self.photoBrowser.delegate respondsToSelector:@selector(photoBrowser:playVideoWithScrollView:imageView:photo:)]) {
+        [self.photoBrowser.delegate photoBrowser:self.photoBrowser playVideoWithScrollView:self imageView:_photoImageView photo:self.photo];
+        self.isVideoViewShown = YES;
+    }
 }
 
 @end

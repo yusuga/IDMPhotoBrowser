@@ -61,4 +61,8 @@
 // Return nil if there is no placeholder
 - (UIImage *)placeholderImage;
 
+/* Added by yusuga */
+- (NSURL *)videoURL;
+- (BOOL)isVideoLoop;
+
 @end

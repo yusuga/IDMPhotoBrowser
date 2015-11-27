@@ -18,7 +18,7 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 #endif
 
 // Private
-@interface IDMPhotoBrowser () {
+@interface IDMPhotoBrowser () <UIGestureRecognizerDelegate> {
 	// Data
     NSMutableArray *_photos;
     
@@ -368,6 +368,16 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     [self actionButtonPressed:sender.view];
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isKindOfClass:[UISlider class]]) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - Animation
 
 - (UIImage*)rotateImageToCurrentOrientation:(UIImage*)image
@@ -666,8 +676,9 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     [_panGesture setMinimumNumberOfTouches:1];
     [_panGesture setMaximumNumberOfTouches:1];
     
-    _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
     if (self.enableLongPressGesture) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
+        _longPressGestureRecognizer.delegate = self;
         [_pagingScrollView addGestureRecognizer:_longPressGestureRecognizer];
     }
     
@@ -1080,13 +1091,16 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 - (CGSize)contentSizeForPagingScrollView {
     // We have to use the paging scroll view's bounds to calculate the contentSize, for the same reason outlined above.
     CGRect bounds = _pagingScrollView.bounds;
+    CGFloat padding = 0.;
     
     NSUInteger numberOfPhotos = [self numberOfPhotos];
     if (numberOfPhotos == 1) {
-        return CGSizeMake(bounds.size.width + 1./[UIScreen mainScreen].scale, bounds.size.height);
-    } else {
-        return CGSizeMake(bounds.size.width * [self numberOfPhotos], bounds.size.height);
+        id<IDMPhoto> photo = [self.photos firstObject];
+        if (![photo videoURL]) {
+            padding = 1./[UIScreen mainScreen].scale;
+        }
     }
+    return CGSizeMake(bounds.size.width * [self numberOfPhotos] + padding, bounds.size.height);
 }
 
 - (CGPoint)contentOffsetForPageAtIndex:(NSUInteger)index {
