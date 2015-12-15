@@ -25,9 +25,12 @@
 
 // Properties
 @property (nonatomic, strong) UIImage *underlyingImage; // Comment out by yusuga
+@property (weak, nonatomic) id<SDWebImageOperation> imageDownloadOperation; // Added by yusuga
 
 // Methods
 - (void)imageLoadingComplete;
+
+
 
 @end
 
@@ -138,7 +141,7 @@ caption = _caption;
         } else if (_photoURL) {
             // Load async from web (using SDWebImageManager)
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            [manager downloadImageWithURL:_photoURL options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            self.imageDownloadOperation = [manager downloadImageWithURL:_photoURL options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                 CGFloat progress = ((CGFloat)receivedSize)/((CGFloat)expectedSize);
                 if (self.progressUpdateBlock) {
                     self.progressUpdateBlock(progress);
@@ -160,6 +163,7 @@ caption = _caption;
 // Release if we can get it again from path or url
 - (void)unloadUnderlyingImage {
     _loadingInProgress = NO;
+    [self.imageDownloadOperation cancel];
 
 	if (self.underlyingImage && (_photoPath || _photoURL)) {
 		self.underlyingImage = nil;
