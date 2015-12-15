@@ -289,4 +289,21 @@ caption = _caption;
                                                         object:self];
 }
 
+#pragma mark added by yusuga
+
+- (void)setLoadingInProgress:(BOOL)loadingInProgress
+{
+    _loadingInProgress = loadingInProgress;
+}
+
+- (NSURL *)videoURL
+{
+    return nil;
+}
+
+- (BOOL)isVideoLoop
+{
+    return NO;
+}
+
 @end
