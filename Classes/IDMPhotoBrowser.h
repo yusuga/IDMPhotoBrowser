@@ -24,10 +24,9 @@
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser didDismissActionSheetWithButtonIndex:(NSUInteger)buttonIndex photoIndex:(NSUInteger)photoIndex;
 - (IDMCaptionView *)photoBrowser:(IDMPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 
-/* Added by yusuga */
-- (UIButton *)photoBrowserPlayVideoButton;
-- (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser playVideoWithScrollView:(IDMZoomingScrollView *)scrollView imageView:(UIImageView *)imageView photo:(id<IDMPhoto>)photo;
-- (void)photoBrowserPrepareForReuseZommingScrollView:(IDMZoomingScrollView *)scrollView;
+- (UIView *)ys_photoBrowserPlayVideoButtonWithTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+- (void)ys_photoBrowser:(IDMPhotoBrowser *)photoBrowser playVideoWithScrollView:(IDMZoomingScrollView *)scrollView imageView:(UIImageView *)imageView photo:(id<IDMPhoto>)photo;
+- (void)ys_photoBrowserPrepareForReuseZommingScrollView:(IDMZoomingScrollView *)scrollView;
 @end
 
 // IDMPhotoBrowser

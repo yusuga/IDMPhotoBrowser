@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Photos/Photos.h>
 #import "IDMPBConstants.h"
 
 // Name of notification used when a photo has completed loading process
@@ -62,7 +63,9 @@
 - (UIImage *)placeholderImage;
 
 /* Added by yusuga */
+- (BOOL)isVideo;
 - (NSURL *)videoURL;
+- (PHAsset *)asset;
 - (BOOL)isVideoLoop;
 
 @end

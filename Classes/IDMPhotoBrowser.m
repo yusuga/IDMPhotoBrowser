@@ -1129,7 +1129,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     NSUInteger numberOfPhotos = [self numberOfPhotos];
     if (numberOfPhotos == 1) {
         id<IDMPhoto> photo = [self.photos firstObject];
-        if (![photo videoURL]) {
+        if (![photo isVideo]) {
             padding = 1./[UIScreen mainScreen].scale;
         }
     }

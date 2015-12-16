@@ -296,7 +296,17 @@ caption = _caption;
     _loadingInProgress = loadingInProgress;
 }
 
+- (BOOL)isVideo
+{
+    return self.videoURL || (self.asset && self.asset.mediaType == PHAssetMediaTypeVideo);
+}
+
 - (NSURL *)videoURL
+{
+    return nil;
+}
+
+- (PHAsset *)asset
 {
     return nil;
 }

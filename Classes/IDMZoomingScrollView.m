@@ -25,7 +25,7 @@
 - (void)handleDoubleTap:(CGPoint)touchPoint;
 
 /* Added by yusuga */
-@property (nonatomic) UIButton *playButton;
+@property (nonatomic) UIView *playButton;
 @property (nonatomic) BOOL isVideoViewShown;
 @end
 
@@ -100,8 +100,8 @@
     [self.playButton removeFromSuperview];
     self.playButton = nil;
     
-    if ([self.photoBrowser.delegate respondsToSelector:@selector(photoBrowserPrepareForReuseZommingScrollView:)]) {
-        [self.photoBrowser.delegate photoBrowserPrepareForReuseZommingScrollView:self];
+    if ([self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowserPrepareForReuseZommingScrollView:)]) {
+        [self.photoBrowser.delegate ys_photoBrowserPrepareForReuseZommingScrollView:self];
     }
 }
 
@@ -205,7 +205,7 @@
 		}
 	}
     
-    if ([self.photo videoURL]) {
+    if ([self.photo isVideo]) {
         maxScale = minScale; // Disable zoom
     }
     
@@ -250,13 +250,12 @@
 	if (!CGRectEqualToRect(_photoImageView.frame, frameToCenter))
 		_photoImageView.frame = frameToCenter;
     
-    if ([self.photo videoURL] && !self.isVideoViewShown) {
+    if ([self.photo isVideo] && !self.isVideoViewShown) {
         if ([self.photoBrowser.photos count] == 1) {
             [self playVideo];
         } else {
-            if (!self.playButton && [self.photoBrowser.delegate respondsToSelector:@selector(photoBrowserPlayVideoButton)]) {
-                self.playButton = [self.photoBrowser.delegate photoBrowserPlayVideoButton];
-                [self.playButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+            if (!self.playButton && [self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowserPlayVideoButtonWithTarget:action:forControlEvents:)]) {
+                self.playButton = [self.photoBrowser.delegate ys_photoBrowserPlayVideoButtonWithTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:self.playButton];
             }
             self.playButton.center = CGPointMake(self.bounds.size.width/2., self.bounds.size.height/2.);
@@ -335,8 +334,8 @@
 
 - (void)playVideo
 {
-    if ([self.photoBrowser.delegate respondsToSelector:@selector(photoBrowser:playVideoWithScrollView:imageView:photo:)]) {
-        [self.photoBrowser.delegate photoBrowser:self.photoBrowser playVideoWithScrollView:self imageView:_photoImageView photo:self.photo];
+    if ([self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowser:playVideoWithScrollView:imageView:photo:)]) {
+        [self.photoBrowser.delegate ys_photoBrowser:self.photoBrowser playVideoWithScrollView:self imageView:_photoImageView photo:self.photo];
         self.isVideoViewShown = YES;
     }
 }
