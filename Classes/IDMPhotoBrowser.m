@@ -449,6 +449,10 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
         resizableImageView.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor) ? 1 : 0 alpha:1];
         [fadeView removeFromSuperview];
         [resizableImageView removeFromSuperview];
+        
+        if (!self.hideControlsFirst) {
+            [self setControlsHidden:NO animated:YES permanent:YES];
+        }
     };
     
     [UIView animateWithDuration:_animationDuration animations:^{
@@ -626,7 +630,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     _toolbar.backgroundColor = [UIColor clearColor];
     _toolbar.clipsToBounds = YES;
     _toolbar.translucent = YES;
-    _toolbar.alpha = self.hideControlsFirst ? 0. : 1.;
+    _toolbar.alpha = 0.;
     [_toolbar setBackgroundImage:[UIImage new]
               forToolbarPosition:UIToolbarPositionAny
                       barMetrics:UIBarMetricsDefault];
@@ -634,7 +638,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     // Close Button
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneButton setFrame:[self frameForDoneButtonAtOrientation:currentOrientation]];
-    [_doneButton setAlpha:self.hideControlsFirst ? 0. : 1.];
+    [_doneButton setAlpha:0.];
     [_doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     if(!_doneButtonImage) {
