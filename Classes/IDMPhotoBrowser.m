@@ -17,6 +17,23 @@
 NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"IDMPBLocalizations" ofType:@"bundle"]], nil)
 #endif
 
+static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @"ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification";
+
+@interface IDMPhotoBrowserView : UIView
+
+@end
+
+@implementation IDMPhotoBrowserView
+
+- (void)didMoveToWindow
+{
+    if (self.window) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification object:nil];
+    }
+}
+
+@end
+
 // Private
 @interface IDMPhotoBrowser () <UIGestureRecognizerDelegate> {
 	// Data
@@ -213,6 +230,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleIDMPhotoLoadingDidEndNotification:)
                                                      name:IDMPhoto_LOADING_DID_END_NOTIFICATION
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(ys_handleIDMPhotoBrowserViewDidMoveToNewWindowNotification:)
+                                                     name:ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification
                                                    object:nil];
     }
     
@@ -574,6 +596,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 
 #pragma mark - View Lifecycle
 
+- (void)loadView
+{
+    self.view = [[IDMPhotoBrowserView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+}
+
 - (void)viewDidLoad {
     // View
 	self.view.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor ? 1 : 0) alpha:1];
@@ -591,9 +618,6 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
 	_pagingScrollView.backgroundColor = [UIColor clearColor];
     _pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
 	[self.view addSubview:_pagingScrollView];
-    
-    // Transition animation
-    [self performPresentAnimation];
     
     UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
@@ -953,6 +977,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
             [page displayImageFailure];
         }
     }
+}
+
+- (void)ys_handleIDMPhotoBrowserViewDidMoveToNewWindowNotification:(NSNotification *)notification
+{
+    [self performPresentAnimation];
 }
 
 #pragma mark - Paging
