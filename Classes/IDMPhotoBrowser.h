@@ -24,9 +24,15 @@
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser didDismissActionSheetWithButtonIndex:(NSUInteger)buttonIndex photoIndex:(NSUInteger)photoIndex;
 - (IDMCaptionView *)photoBrowser:(IDMPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 
+- (void)ys_photoBrowserPrepareForReuseZommingScrollView:(IDMZoomingScrollView *)scrollView;
+@end
+
+@protocol IDMPhotoBrowserVideoDelegate <NSObject>
+
 - (UIView *)ys_photoBrowserPlayVideoButtonWithTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 - (void)ys_photoBrowser:(IDMPhotoBrowser *)photoBrowser playVideoWithScrollView:(IDMZoomingScrollView *)scrollView imageView:(UIImageView *)imageView photo:(id<IDMPhoto>)photo;
-- (void)ys_photoBrowserPrepareForReuseZommingScrollView:(IDMZoomingScrollView *)scrollView;
+- (void)ys_photoBrowserVideoPrepareForReuse;
+
 @end
 
 // IDMPhotoBrowser
@@ -34,6 +40,7 @@
 
 // Properties
 @property (nonatomic, weak) id <IDMPhotoBrowserDelegate> delegate;
+@property (nonatomic, weak) id <IDMPhotoBrowserVideoDelegate> videoDelegate;
 
 // Toolbar customization
 @property (nonatomic) BOOL displayToolbar;

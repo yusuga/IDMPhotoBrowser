@@ -103,6 +103,10 @@
     if ([self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowserPrepareForReuseZommingScrollView:)]) {
         [self.photoBrowser.delegate ys_photoBrowserPrepareForReuseZommingScrollView:self];
     }
+    
+    if ([self.photoBrowser.videoDelegate respondsToSelector:@selector(ys_photoBrowserVideoPrepareForReuse)]) {
+        [self.photoBrowser.videoDelegate ys_photoBrowserVideoPrepareForReuse];
+    }
 }
 
 #pragma mark - Image
@@ -254,8 +258,8 @@
         if ([self.photoBrowser.photos count] == 1) {
             [self playVideo];
         } else {
-            if (!self.playButton && [self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowserPlayVideoButtonWithTarget:action:forControlEvents:)]) {
-                self.playButton = [self.photoBrowser.delegate ys_photoBrowserPlayVideoButtonWithTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+            if (!self.playButton && [self.photoBrowser.videoDelegate respondsToSelector:@selector(ys_photoBrowserPlayVideoButtonWithTarget:action:forControlEvents:)]) {
+                self.playButton = [self.photoBrowser.videoDelegate ys_photoBrowserPlayVideoButtonWithTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:self.playButton];
             }
             self.playButton.center = CGPointMake(self.bounds.size.width/2., self.bounds.size.height/2.);
@@ -334,8 +338,8 @@
 
 - (void)playVideo
 {
-    if ([self.photoBrowser.delegate respondsToSelector:@selector(ys_photoBrowser:playVideoWithScrollView:imageView:photo:)]) {
-        [self.photoBrowser.delegate ys_photoBrowser:self.photoBrowser playVideoWithScrollView:self imageView:_photoImageView photo:self.photo];
+    if ([self.photoBrowser.videoDelegate respondsToSelector:@selector(ys_photoBrowser:playVideoWithScrollView:imageView:photo:)]) {
+        [self.photoBrowser.videoDelegate ys_photoBrowser:self.photoBrowser playVideoWithScrollView:self imageView:_photoImageView photo:self.photo];
         self.isVideoViewShown = YES;
     }
 }
