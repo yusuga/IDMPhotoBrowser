@@ -409,6 +409,7 @@
 			showEnvVarsInLog = 0;
 		};
 		C2E233751FBF025D0387AE59 /* Embed Pods Frameworks */ = {
+		912D538AED87C7A1F65FBA8F /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

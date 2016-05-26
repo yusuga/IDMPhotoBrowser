@@ -24,7 +24,7 @@
 }
 
 // Properties
-@property (nonatomic, strong) UIImage *underlyingImage; // Comment out by yusuga
+@property (nonatomic, strong) UIImage *underlyingImage;
 @property (weak, nonatomic) id<SDWebImageOperation> imageDownloadOperation; // Added by yusuga
 
 // Methods

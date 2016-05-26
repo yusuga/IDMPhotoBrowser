@@ -18,6 +18,8 @@
 @class IDMPhotoBrowser;
 @protocol IDMPhotoBrowserDelegate <NSObject>
 @optional
+- (void)willAppearPhotoBrowser:(IDMPhotoBrowser *)photoBrowser;
+- (void)willDisappearPhotoBrowser:(IDMPhotoBrowser *)photoBrowser;
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser didShowPhotoAtIndex:(NSUInteger)index;
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser didDismissAtPageIndex:(NSUInteger)index;
 - (void)photoBrowser:(IDMPhotoBrowser *)photoBrowser willDismissAtPageIndex:(NSUInteger)index;
@@ -36,7 +38,7 @@
 @end
 
 // IDMPhotoBrowser
-@interface IDMPhotoBrowser : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate> 
+@interface IDMPhotoBrowser : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
 // Properties
 @property (nonatomic, weak) id <IDMPhotoBrowserDelegate> delegate;
@@ -65,10 +67,13 @@
 @property (nonatomic) BOOL usePopAnimation;
 @property (nonatomic) BOOL disableVerticalSwipe;
 
-// defines zooming of the background (default 1.0)
+// Default value: true. Set to false to tell the photo viewer not to hide the interface when scrolling
+@property (nonatomic) BOOL autoHideInterface;
+
+// Defines zooming of the background (default 1.0)
 @property (nonatomic) float backgroundScaleFactor;
 
-// animation time (default .28)
+// Animation time (default .28)
 @property (nonatomic) float animationDuration;
 
 // Init
