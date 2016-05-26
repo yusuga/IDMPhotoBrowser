@@ -433,7 +433,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
         [resizableImageView removeFromSuperview];
     };
     
-    [self setControlsHidden:self.hideControlsFirst animated:YES permanent:YES];
+    [self setControlsHidden:self.ys_hideControlsFirst animated:YES permanent:YES];
     
     [UIView animateWithDuration:_animationDuration animations:^{
         fadeView.backgroundColor = self.useWhiteBackgroundColor ? [UIColor whiteColor] : [UIColor blackColor];
@@ -719,7 +719,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     [_panGesture setMaximumNumberOfTouches:1];
     
     
-    if (self.enableLongPressGesture) {
+    if (self.ys_enableLongPressGesture) {
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognized:)];
         _longPressGestureRecognizer.delegate = self;
         [_pagingScrollView addGestureRecognizer:_longPressGestureRecognizer];

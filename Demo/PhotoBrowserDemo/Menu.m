@@ -115,7 +115,7 @@
     browser.displayCounterLabel = YES;
     browser.forceHideStatusBar = NO;
     browser.usePopAnimation = YES;
-    browser.hideControlsFirst = YES;
+    browser.ys_hideControlsFirst = YES;
     browser.scaleImage = buttonSender.currentImage;
     if(buttonSender.tag == 102) browser.useWhiteBackgroundColor = YES;
     

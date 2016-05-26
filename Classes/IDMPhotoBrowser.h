@@ -101,8 +101,7 @@
 @property (nonatomic, readonly) NSMutableArray *photos;
 @property (nonatomic, readonly) NSUInteger currentPageIndex;
 @property (nonatomic, readonly) UIButton *doneButton;
-@property (nonatomic) BOOL hideControlsFirst;
-@property (nonatomic) BOOL disableAutoHideControls;
-@property (nonatomic) BOOL enableLongPressGesture;
+@property (nonatomic) BOOL ys_hideControlsFirst;
+@property (nonatomic) BOOL ys_enableLongPressGesture;
 
 @end
