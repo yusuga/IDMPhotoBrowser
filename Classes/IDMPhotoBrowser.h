@@ -102,7 +102,6 @@
 @property (nonatomic, readonly) NSUInteger currentPageIndex;
 @property (nonatomic, readonly) UIButton *doneButton;
 @property (nonatomic) BOOL hideControlsFirst;
-@property (nonatomic) BOOL disableHideControlsWhenDraggingBegins;
 @property (nonatomic) BOOL disableAutoHideControls;
 @property (nonatomic) BOOL enableLongPressGesture;
 

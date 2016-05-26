@@ -113,13 +113,13 @@
     browser.displayActionButton = NO;
     browser.displayArrowButton = YES;
     browser.displayCounterLabel = YES;
-    browser.forceHideStatusBar = YES;
+    browser.forceHideStatusBar = NO;
     browser.usePopAnimation = YES;
     browser.hideControlsFirst = YES;
-    browser.disableHideControlsWhenDraggingBegins = YES;
-    browser.disableAutoHideControls = YES;
     browser.scaleImage = buttonSender.currentImage;
     if(buttonSender.tag == 102) browser.useWhiteBackgroundColor = YES;
+    
+    browser.autoHideInterface = NO;
     
     // Show
     [self presentViewController:browser animated:YES completion:nil];

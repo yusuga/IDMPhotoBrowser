@@ -424,19 +424,17 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     resizableImageView.backgroundColor = [UIColor clearColor];
     [_applicationWindow addSubview:resizableImageView];
     _senderViewForAnimation.hidden = YES;
-
+    
     void (^completion)() = ^() {
         self.view.alpha = 1.0f;
         _pagingScrollView.alpha = 1.0f;
         resizableImageView.backgroundColor = [UIColor colorWithWhite:(_useWhiteBackgroundColor) ? 1 : 0 alpha:1];
         [fadeView removeFromSuperview];
         [resizableImageView removeFromSuperview];
-        
-        if (!self.hideControlsFirst) {
-            [self setControlsHidden:NO animated:YES permanent:YES];
-        }
     };
-
+    
+    [self setControlsHidden:self.hideControlsFirst animated:YES permanent:YES];
+    
     [UIView animateWithDuration:_animationDuration animations:^{
         fadeView.backgroundColor = self.useWhiteBackgroundColor ? [UIColor whiteColor] : [UIColor blackColor];
     } completion:nil];
@@ -646,7 +644,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     _toolbar.backgroundColor = [UIColor clearColor];
     _toolbar.clipsToBounds = YES;
     _toolbar.translucent = YES;
-    _toolbar.alpha = 0.;
+    _toolbar.alpha = 1.;
     [_toolbar setBackgroundImage:[UIImage new]
               forToolbarPosition:UIToolbarPositionAny
                       barMetrics:UIBarMetricsDefault];
@@ -654,7 +652,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
     // Close Button
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneButton setFrame:[self frameForDoneButtonAtOrientation:currentOrientation]];
-    [_doneButton setAlpha:0.];
+    [_doneButton setAlpha:1.];
     [_doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
     if(!_doneButtonImage) {
@@ -1342,10 +1340,6 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
 #pragma mark - Buttons
 
 - (void)doneButtonPressed:(id)sender {
-#warning needs?
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-
     if ([_delegate respondsToSelector:@selector(willDisappearPhotoBrowser:)]) {
         [_delegate willDisappearPhotoBrowser:self];
     }
