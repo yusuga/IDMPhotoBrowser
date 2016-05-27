@@ -632,10 +632,7 @@ static NSString * const ys_IDMPhotoBrowserViewDidMoveToNewWindowNotification = @
 	_pagingScrollView.showsVerticalScrollIndicator = NO;
 	_pagingScrollView.backgroundColor = [UIColor clearColor];
     _pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
-	[self.view addSubview:_pagingScrollView];
-    
-    // Transition animation
-    [self performPresentAnimation];
+    [self.view addSubview:_pagingScrollView];
     
     UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
 
